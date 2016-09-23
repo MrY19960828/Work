@@ -24,7 +24,7 @@ done
 
 while true
 do
-    read -p "Pleace input a number [ ${numbers}]: " exec_shell
+    read -p "Pleace input a number [ ${numbers} ]: " exec_shell
     if [[ ! ${exec_shell} =~ ^[0-9]*$ ]];then
         exit 0
     fi

@@ -41,4 +41,20 @@ reset_terminal=$(tput sgr0);
 	who>/tmp/who
 	echo -e ${reset_color} "Logged In Users: " ${reset_terminal}  && cat /tmp/who 
 	rm -f /tmp/who
+
+####################################
+# Check System memuserages
+	system_men_usages=$(awk '/MemTotal/{total=$2}/MemFree/{free=$2}END{print (total-free)/1024}' /proc/meminfo)
+	echo -e ${reset_color} "System memuserages: " ${reset_terminal} ${system_men_usages} "M"
+# Check Apps memuserages
+	apps_mem_usages=$(awk '/MemTotal/{total=$2}/MemFree/{free=$2}/^Cached/{cached=$2}/Buffers/{buffers=$2}END{print (total-free-cached-buffers)/1024}' /proc/meminfo)
+	echo -e ${reset_color} "Apps memuserages: " ${reset_terminal} ${apps_mem_usages} "M"
+# Check Load average
+	load_averafe=$(top -n 1 b|grep "load average"|awk '{print($11 $12 $13)}')
+	echo -e ${reset_color} "Load average: " ${reset_terminal} ${load_averafe}
+# Check Disk average
+	disk_average=$(df -Ph|grep -vE 'Filesystem|tmpfs'|awk '{print($1 ": " $5)}')
+	echo -e ${reset_color} "Disk average: " ${reset_terminal} ${disk_average}
+
+
 fi
