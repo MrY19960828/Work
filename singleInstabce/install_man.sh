@@ -23,10 +23,10 @@ done
 while true
 do
     read -p "Pleace input a number [ $numbers ]:" exec_shell
-    if [[ ! ${exec_shell} =~ ^[0-9]+ ]];then
+    if [[ ! "${exec_shell}" =~ ^[0-9]*$  ]];then
         exit 0
     fi
-    if [[ ${exec_shell} -ge ${#ssharray[*]} ]];then
+    if [[ "${exec_shell}" -ge "${#ssharray[*]}" ]];then
         exit 0
     fi
     /bin/sh ${ssharray[$exec_shell]}
