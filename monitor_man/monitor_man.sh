@@ -28,6 +28,9 @@ do
     if [[ ! ${exec_shell} =~ ^[0-9]*$ ]];then
         exit 0
     fi
+    if [[ -z ${exec_shell} ]];then
+        exit 0
+    fi
     if [[ "${exec_shell}" -ge "${#ssharray[*]}" ]];then
         exit 0
     fi
