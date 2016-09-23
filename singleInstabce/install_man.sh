@@ -6,7 +6,8 @@
 #===============================================
 #!/bin/bash
 
-resettem=$(tput sgr0)
+reset_color='\e[35m'
+reset_terminal=$(tput sgr0);
 declare -A ssharray
 i=0
 number=""
@@ -14,7 +15,7 @@ number=""
 file_list=$(ls  -I install_man.sh *.sh )
 for script_file in ${file_list}
 do
-    echo -e "\e[1;30m" "This Script: "${i} '==>'${resettem} ${script_file}
+    echo -e ${reset_color} "This Script: "${i} '==>'${reset_terminal} ${script_file}
     ssharray[$i]=${script_file}
     numbers="${numbers} | ${i}"
     i=$((i+1))
